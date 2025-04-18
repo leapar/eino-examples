@@ -24,7 +24,7 @@ func main() {
 func rag(ctx context.Context) {
 
 	// Call RunAgent with the input
-	sr, err := runAgent(ctx, "Eino 是什么")
+	sr, err := runAgent(ctx, "介绍 eino agent")
 	if err != nil {
 		fmt.Printf("Error from RunAgent: %v\n", err)
 		return
@@ -92,15 +92,17 @@ func indexMarkdownFiles(ctx context.Context, dir string) error {
 	return err
 }
 
-func runAgent(ctx context.Context, msg string) (*schema.StreamReader[*schema.Message], error) {
+func runAgent(ctx context.Context, query string) (*schema.StreamReader[*schema.Message], error) {
 
-	runner, err := retriever.BuildEinoAgent(ctx)
+	runner, err := retriever.BuildEinoAgent(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build agent graph: %w", err)
 	}
 
+	fmt.Println("问：", query)
+
 	userMessage := &retriever.UserMessage{
-		Query: msg,
+		Query: query,
 		//	History: make([]*schema.Message, 0),
 	}
 
@@ -118,7 +120,7 @@ func runAgent(ctx context.Context, msg string) (*schema.StreamReader[*schema.Mes
 		defer func() {
 			// close stream if you used it
 			srs[1].Close()
-			fmt.Println(msg)
+			fmt.Println(query)
 			fullMsg, err := schema.ConcatMessages(fullMsgs)
 			if err != nil {
 				fmt.Println("error concatenating messages: ", err.Error())

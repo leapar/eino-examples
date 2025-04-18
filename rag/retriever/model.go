@@ -27,6 +27,7 @@ import (
 
 // newChatModel component initialization function of node 'ChatModel1' in graph 'demo'
 func newChatModel(ctx context.Context) (cm model.ChatModel, err error) {
+	return newOllamaChatModel(ctx)
 	return newSiliconflowChatModel(ctx)
 }
 

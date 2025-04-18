@@ -36,3 +36,4 @@ output/*
 .vscode
 .DS_Store
 /rag/db
+rag/retriever/const.go
