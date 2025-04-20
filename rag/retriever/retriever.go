@@ -24,8 +24,8 @@ func init() {
 func newRetriever(ctx context.Context) (rtr retriever.Retriever, err error) {
 	config := &chromem.RetrieverConfig{
 		Client:         db,
-		TopK:           8,
-		ScoreThreshold: 0.7,
+		TopK:           5,
+		ScoreThreshold: 0.5,
 	}
 	embeddingIns11, err := newEmbedding(ctx)
 	if err != nil {
@@ -36,8 +36,6 @@ func newRetriever(ctx context.Context) (rtr retriever.Retriever, err error) {
 	reranker, err := bailian.NewReRanker(ctx, &bailian.ReRankerConfig{
 		Model:           "gte-rerank",
 		ReturnDocuments: false,
-		TopK:            5,
-		ScoreThreshold:  0.7,
 		ApiKey:          ALI_BAILIAN_API_KEY,
 	})
 	if err != nil {

@@ -20,16 +20,35 @@ import (
 	"context"
 
 	"github.com/cloudwego/eino-ext/components/document/loader/file"
+	"github.com/cloudwego/eino-ext/components/document/parser/doc"
+	"github.com/cloudwego/eino-ext/components/document/parser/pdf"
 	"github.com/cloudwego/eino/components/document"
+	"github.com/cloudwego/eino/components/document/parser"
 )
 
 // newLoader component initialization function of node 'FileLoader' in graph 'KnowledgeIndexing'
 func newLoader(ctx context.Context) (ldr document.Loader, err error) {
+	extParser, err := parser.NewExtParser(ctx, &parser.ExtParserConfig{
+		FallbackParser: parser.TextParser{},
+		Parsers: map[string]parser.Parser{
+			".pdf":  &pdf.PDFParser{},
+			".md":   &parser.TextParser{},
+			".doc":  &doc.DocParser{},
+			".docx": &doc.DocParser{},
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	// TODO Modify component configuration here.
-	config := &file.FileLoaderConfig{}
+	config := &file.FileLoaderConfig{
+		Parser: extParser,
+	}
 	ldr, err = file.NewFileLoader(ctx, config)
 	if err != nil {
 		return nil, err
 	}
+
 	return ldr, nil
 }

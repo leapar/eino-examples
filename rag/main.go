@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/fs"
 	"path/filepath"
-	"strings"
 
 	"github.com/cloudwego/eino-examples/rag/indexing"
 	"github.com/cloudwego/eino-examples/rag/retriever"
@@ -24,7 +23,7 @@ func main() {
 func rag(ctx context.Context) {
 
 	// Call RunAgent with the input
-	sr, err := runAgent(ctx, "介绍 eino agent")
+	sr, err := runAgent(ctx, "步进式全景展示")
 	if err != nil {
 		fmt.Printf("Error from RunAgent: %v\n", err)
 		return
@@ -72,7 +71,13 @@ func indexMarkdownFiles(ctx context.Context, dir string) error {
 			return nil
 		}
 
-		if !strings.HasSuffix(path, ".md") {
+		ext := filepath.Ext(path)
+
+		switch ext {
+		case ".md":
+		case ".doc":
+		case ".docx":
+		default:
 			fmt.Printf("[skip] not a markdown file: %s\n", path)
 			return nil
 		}

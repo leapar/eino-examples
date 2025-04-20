@@ -37,3 +37,4 @@ output/*
 .DS_Store
 /rag/db
 rag/retriever/const.go
+/rag/eino-docs

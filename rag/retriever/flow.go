@@ -44,6 +44,9 @@ func newLambda1(ctx context.Context) (lba *compose.Lambda, err error) {
 	cli.Initialize(ctx, initRequest)
 
 	tools, _ := mcpp.GetTools(ctx, &mcpp.Config{Cli: cli})
+	locTools, _ := GetTools(ctx)
+
+	tools = append(tools, locTools...)
 
 	config.ToolsConfig.Tools = tools
 
