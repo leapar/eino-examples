@@ -20,21 +20,47 @@ import (
 	"context"
 
 	"github.com/cloudwego/eino-ext/components/document/loader/file"
+	"github.com/cloudwego/eino-ext/components/document/parser/csv"
 	"github.com/cloudwego/eino-ext/components/document/parser/doc"
 	"github.com/cloudwego/eino-ext/components/document/parser/pdf"
+	"github.com/cloudwego/eino-ext/components/document/parser/xlsx"
 	"github.com/cloudwego/eino/components/document"
 	"github.com/cloudwego/eino/components/document/parser"
 )
 
 // newLoader component initialization function of node 'FileLoader' in graph 'KnowledgeIndexing'
 func newLoader(ctx context.Context) (ldr document.Loader, err error) {
+	pdfParser, err := pdf.NewPDFParser(&pdf.Config{ToPages: true})
+	if err != nil {
+		return nil, err
+	}
+
+	docParser, err := doc.NewDocParser()
+	if err != nil {
+		return nil, err
+	}
+
+	csvParser, err := csv.NewCsvParser()
+	if err != nil {
+		return nil, err
+	}
+
+	xlsxParser, err := xlsx.NewXlsxParser()
+	if err != nil {
+		return nil, err
+	}
+	txtParser := &parser.TextParser{}
+
 	extParser, err := parser.NewExtParser(ctx, &parser.ExtParserConfig{
 		FallbackParser: parser.TextParser{},
 		Parsers: map[string]parser.Parser{
-			".pdf":  &pdf.PDFParser{},
-			".md":   &parser.TextParser{},
-			".doc":  &doc.DocParser{},
-			".docx": &doc.DocParser{},
+			".pdf":  pdfParser,
+			".txt":  txtParser,
+			".md":   txtParser,
+			".doc":  docParser,
+			".docx": docParser,
+			".xlsx": xlsxParser,
+			".csv":  csvParser,
 		},
 	})
 	if err != nil {

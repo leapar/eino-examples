@@ -16,8 +16,8 @@ import (
 
 func main() {
 	ctx := context.Background()
-	//index(ctx)
-	rag(ctx)
+	index(ctx)
+	//rag(ctx)
 }
 
 func rag(ctx context.Context) {
@@ -77,8 +77,12 @@ func indexMarkdownFiles(ctx context.Context, dir string) error {
 		case ".md":
 		case ".doc":
 		case ".docx":
+		case ".txt":
+		case ".pdf":
+		case ".xlsx":
+		case ".csv":
 		default:
-			fmt.Printf("[skip] not a markdown file: %s\n", path)
+			fmt.Printf("[skip] unsupport file: %s\n", path)
 			return nil
 		}
 
