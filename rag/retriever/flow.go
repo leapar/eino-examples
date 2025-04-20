@@ -23,6 +23,7 @@ import (
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/flow/agent/react"
 	"github.com/mark3labs/mcp-go/client"
+	"github.com/mark3labs/mcp-go/mcp"
 )
 
 // newLambda1 component initialization function of node 'ReactAgent' in graph 'EinoAgent'
@@ -31,17 +32,27 @@ func newLambda1(ctx context.Context) (lba *compose.Lambda, err error) {
 	config := &react.AgentConfig{
 		MaxStep:            25,
 		ToolReturnDirectly: map[string]struct{}{}}
+	cli, _ := client.NewSSEMCPClient("http://localhost:21727/sse")
+	cli.Start(ctx)
+	// 发送 init request
+	initRequest := mcp.InitializeRequest{}
+	initRequest.Params.ProtocolVersion = mcp.LATEST_PROTOCOL_VERSION
+	initRequest.Params.ClientInfo = mcp.Implementation{
+		Name:    "current-time",
+		Version: "1.0.0",
+	}
+	cli.Initialize(ctx, initRequest)
+
+	tools, _ := mcpp.GetTools(ctx, &mcpp.Config{Cli: cli})
+
+	config.ToolsConfig.Tools = tools
+
 	chatModelIns11, err := newChatModel(ctx)
 	if err != nil {
 		return nil, err
 	}
 	config.Model = chatModelIns11
 
-	cli, _ := client.NewSSEMCPClient("http://localhost:21727/sse")
-	cli.Start(ctx)
-	tools, _ := mcpp.GetTools(ctx, &mcpp.Config{Cli: cli})
-
-	config.ToolsConfig.Tools = tools
 	ins, err := react.NewAgent(ctx, config)
 	if err != nil {
 		return nil, err
