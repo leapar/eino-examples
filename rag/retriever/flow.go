@@ -19,8 +19,10 @@ package retriever
 import (
 	"context"
 
+	mcpp "github.com/cloudwego/eino-ext/components/tool/mcp"
 	"github.com/cloudwego/eino/compose"
 	"github.com/cloudwego/eino/flow/agent/react"
+	"github.com/mark3labs/mcp-go/client"
 )
 
 // newLambda1 component initialization function of node 'ReactAgent' in graph 'EinoAgent'
@@ -34,6 +36,12 @@ func newLambda1(ctx context.Context) (lba *compose.Lambda, err error) {
 		return nil, err
 	}
 	config.Model = chatModelIns11
+
+	cli, _ := client.NewSSEMCPClient("http://localhost:21727/sse")
+	cli.Start(ctx)
+	tools, _ := mcpp.GetTools(ctx, &mcpp.Config{Cli: cli})
+
+	config.ToolsConfig.Tools = tools
 	ins, err := react.NewAgent(ctx, config)
 	if err != nil {
 		return nil, err

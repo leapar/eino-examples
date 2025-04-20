@@ -45,7 +45,7 @@ func newOllamaChatModel(ctx context.Context) (cm model.ChatModel, err error) {
 }
 
 func newSiliconflowChatModel(ctx context.Context) (cm model.ChatModel, err error) {
-	key := "sk-blyesrzaohzcmruwwxngupcpguywdrszdlpxcnctkenjcgqv"
+	key := SILICONFLOW_API_KEY
 	modelName := "Qwen/Qwen2.5-7B-Instruct"
 	baseURL := "https://api.siliconflow.cn/v1"
 	cm, err = openai.NewChatModel(ctx, &openai.ChatModelConfig{
