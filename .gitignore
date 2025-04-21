@@ -36,5 +36,5 @@ output/*
 .vscode
 .DS_Store
 /rag/db
-rag/retriever/const.go
+security.const.go
 /rag/eino-docs
