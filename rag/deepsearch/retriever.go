@@ -25,7 +25,7 @@ func newRetriever(ctx context.Context) (rtr retriever.Retriever, err error) {
 	config := &chromem.RetrieverConfig{
 		Client:         db,
 		TopK:           5,
-		ScoreThreshold: 0.5,
+		ScoreThreshold: 0.1,
 	}
 	embeddingIns11, err := newEmbedding(ctx)
 	if err != nil {

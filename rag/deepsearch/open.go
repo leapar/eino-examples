@@ -72,7 +72,7 @@ func (of *OpenFileToolImpl) Invoke(ctx context.Context, req OpenReq) (res OpenRe
 		}
 	}
 
-	err = exec.Command("open", req.URI).Run()
+	err = exec.Command("explorer.exe", req.URI).Run()
 	if err != nil {
 		res.Message = fmt.Sprintf("failed to open %s: %s", req.URI, err.Error())
 		return res, nil
