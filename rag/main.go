@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"io"
 	"io/fs"
@@ -43,9 +42,6 @@ func rag(ctx context.Context) {
 		}
 		fmt.Print(msg.Content)
 	}
-	fmt.Println()
-	fmt.Println()
-
 }
 
 func index(ctx context.Context) {
@@ -122,41 +118,41 @@ func runAgent(ctx context.Context, query string) (*schema.StreamReader[*schema.M
 	}
 
 	srs := sr.Copy(2)
+	/*
+		go func() {
+			// for save to memory
+			fullMsgs := make([]*schema.Message, 0)
 
-	go func() {
-		// for save to memory
-		fullMsgs := make([]*schema.Message, 0)
+			defer func() {
+				// close stream if you used it
+				srs[1].Close()
+				fmt.Println(query)
+				fullMsg, err := schema.ConcatMessages(fullMsgs)
+				if err != nil {
+					fmt.Println("error concatenating messages: ", err.Error())
+				} else {
+					fmt.Println(fullMsg)
+				}
+			}()
 
-		defer func() {
-			// close stream if you used it
-			srs[1].Close()
-			fmt.Println(query)
-			fullMsg, err := schema.ConcatMessages(fullMsgs)
-			if err != nil {
-				fmt.Println("error concatenating messages: ", err.Error())
-			} else {
-				fmt.Println(fullMsg)
+		outer:
+			for {
+				select {
+				case <-ctx.Done():
+					fmt.Println("context done", ctx.Err())
+					return
+				default:
+					chunk, err := srs[1].Recv()
+					if err != nil {
+						if errors.Is(err, io.EOF) {
+							break outer
+						}
+					}
+
+					fullMsgs = append(fullMsgs, chunk)
+				}
 			}
 		}()
-
-	outer:
-		for {
-			select {
-			case <-ctx.Done():
-				fmt.Println("context done", ctx.Err())
-				return
-			default:
-				chunk, err := srs[1].Recv()
-				if err != nil {
-					if errors.Is(err, io.EOF) {
-						break outer
-					}
-				}
-
-				fullMsgs = append(fullMsgs, chunk)
-			}
-		}
-	}()
-
+	*/
 	return srs[0], nil
 }
