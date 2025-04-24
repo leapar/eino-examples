@@ -41,7 +41,7 @@ func main() {
 		return
 	}
 
-	pdfParser, err := pdf.NewPDFParser(&pdf.Config{ToPages: true})
+	pdfParser, err := pdf.NewPDFParser(ctx, &pdf.Config{})
 	if err != nil {
 		logs.Errorf("pdf.NewPDFParser failed, err=%v", err)
 		return
