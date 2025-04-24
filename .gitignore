@@ -35,6 +35,3 @@ output/*
 # Vscode files
 .vscode
 .DS_Store
-/rag/db
-security.const.go
-/rag/eino-docs
