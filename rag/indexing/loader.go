@@ -30,7 +30,7 @@ import (
 
 // newLoader component initialization function of node 'FileLoader' in graph 'KnowledgeIndexing'
 func newLoader(ctx context.Context) (ldr document.Loader, err error) {
-	pdfParser, err := pdf.NewPDFParser(&pdf.Config{ToPages: true})
+	pdfParser, err := pdf.NewPDFParser(ctx, &pdf.Config{ToPages: true})
 	if err != nil {
 		return nil, err
 	}
