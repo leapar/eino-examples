@@ -70,10 +70,10 @@ func main() {
 
 	sr, err := ragent.Stream(ctx, []*schema.Message{
 		{
-			Role: schema.User,
-			//Content: "所有展厅列表",
+			Role:    schema.User,
+			Content: "所有展厅列表",
 			//Content: "获取展厅“艺术展馆”的详细信息",
-			Content: "鲁迅详细介绍",
+			//Content: "鲁迅详细介绍",
 		},
 	})
 	if err != nil {
