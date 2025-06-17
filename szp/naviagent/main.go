@@ -1,3 +1,7 @@
+/*
+ * Copyright 2025 3dman.cn
+ */
+
 package main
 
 import (
