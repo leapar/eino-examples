@@ -7,8 +7,8 @@ import (
 	"io/fs"
 	"path/filepath"
 
-	"github.com/cloudwego/eino-examples/rag/deepsearch"
-	"github.com/cloudwego/eino-examples/rag/indexing"
+	"github.com/cloudwego/eino-examples/szp/rag/deepsearch"
+	"github.com/cloudwego/eino-examples/szp/rag/indexing"
 
 	"github.com/cloudwego/eino/components/document"
 	"github.com/cloudwego/eino/schema"
