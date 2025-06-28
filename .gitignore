@@ -38,3 +38,4 @@ output/*
 
 security.const.go
 /szp/rag/db
+/szp/rag/water3d_docs_db

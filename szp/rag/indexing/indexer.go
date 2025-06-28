@@ -29,7 +29,7 @@ var db *cg.DB
 
 func init() {
 	var err error
-	db, err = cg.NewPersistentDB("./db", true)
+	db, err = cg.NewPersistentDB("./water3d_docs_db", true)
 	if err != nil {
 		fmt.Println(err)
 	}
