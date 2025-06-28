@@ -23,7 +23,7 @@ func main() {
 func rag(ctx context.Context) {
 
 	// Call RunAgent with the input
-	sr, err := runAgent(ctx, "自发光")
+	sr, err := runAgent(ctx, "弹出图片")
 	if err != nil {
 		fmt.Printf("Error from RunAgent: %v\n", err)
 		return
@@ -45,7 +45,7 @@ func rag(ctx context.Context) {
 }
 
 func index(ctx context.Context) {
-	err := indexMarkdownFiles(ctx, "./my")
+	err := indexMarkdownFiles(ctx, "./docs/water3d")
 	if err != nil {
 		panic(err)
 	}
