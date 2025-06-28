@@ -25,7 +25,8 @@ import (
 	"github.com/cloudwego/eino/schema"
 )
 
-func newLambda(ctx context.Context, docs []*schema.Document, opts ...any) (output []*schema.Document, err error) {
+// 在doc中拼接目录结构
+func appendHeadersLambda(ctx context.Context, docs []*schema.Document, opts ...any) (output []*schema.Document, err error) {
 
 	headers := []string{
 		"title1",
@@ -61,33 +62,40 @@ func BuildKnowledgeIndexing(ctx context.Context) (r compose.Runnable[document.So
 	const (
 		FileLoader       = "FileLoader"
 		MarkdownSplitter = "MarkdownSplitter"
-		RedisIndexer     = "RedisIndexer"
+		ChromemIndexer   = "ChromemIndexer"
 		HeaderAppender   = "HeaderAppender"
 	)
+
 	g := compose.NewGraph[document.Source, []string]()
 	fileLoaderKeyOfLoader, err := newLoader(ctx)
 	if err != nil {
 		return nil, err
 	}
+
+	//问答加载节点
 	_ = g.AddLoaderNode(FileLoader, fileLoaderKeyOfLoader)
-	markdownSplitterKeyOfDocumentTransformer, err := newDocumentTransformer(ctx)
+
+	//切割器节点
+	markdownSplitterTransformer, err := newDocumentTransformer(ctx)
 	if err != nil {
 		return nil, err
 	}
+	_ = g.AddDocumentTransformerNode(MarkdownSplitter, markdownSplitterTransformer)
+	_ = g.AddLambdaNode(HeaderAppender, compose.InvokableLambdaWithOption(appendHeadersLambda), compose.WithNodeName("DocsAppendHeaders"))
 
-	_ = g.AddLambdaNode(HeaderAppender, compose.InvokableLambdaWithOption(newLambda), compose.WithNodeName("DocsAppendHeaders"))
-
-	_ = g.AddDocumentTransformerNode(MarkdownSplitter, markdownSplitterKeyOfDocumentTransformer)
-	redisIndexerKeyOfIndexer, err := newIndexer(ctx)
+	//向量化节点
+	chromemIndexer, err := newChromemIndexer(ctx)
 	if err != nil {
 		return nil, err
 	}
-	_ = g.AddIndexerNode(RedisIndexer, redisIndexerKeyOfIndexer)
+	_ = g.AddIndexerNode(ChromemIndexer, chromemIndexer)
+
+	//构建图
 	_ = g.AddEdge(compose.START, FileLoader)
-	_ = g.AddEdge(RedisIndexer, compose.END)
 	_ = g.AddEdge(FileLoader, MarkdownSplitter)
 	_ = g.AddEdge(MarkdownSplitter, HeaderAppender)
-	_ = g.AddEdge(HeaderAppender, RedisIndexer)
+	_ = g.AddEdge(HeaderAppender, ChromemIndexer)
+	_ = g.AddEdge(ChromemIndexer, compose.END)
 
 	r, err = g.Compile(ctx, compose.WithGraphName("KnowledgeIndexing"), compose.WithNodeTriggerMode(compose.AnyPredecessor))
 	if err != nil {

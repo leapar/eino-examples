@@ -36,17 +36,17 @@ func init() {
 }
 
 // newIndexer component initialization function of node 'RedisIndexer' in graph 'KnowledgeIndexing'
-func newIndexer(ctx context.Context) (idr indexer.Indexer, err error) {
+func newChromemIndexer(ctx context.Context) (idr indexer.Indexer, err error) {
 
 	config := &chromem.IndexerConfig{
 		Client: db,
 	}
 
-	embeddingIns11, err := newEmbedding(ctx)
+	embedding, err := newEmbedding(ctx)
 	if err != nil {
 		return nil, err
 	}
-	config.Embedding = embeddingIns11
+	config.Embedding = embedding
 	idr, err = chromem.NewIndexer(ctx, config)
 	if err != nil {
 		return nil, err

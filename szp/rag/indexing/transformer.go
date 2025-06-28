@@ -23,7 +23,6 @@ import (
 	"github.com/cloudwego/eino/components/document"
 )
 
-// newDocumentTransformer component initialization function of node 'MarkdownSplitter' in graph 'KnowledgeIndexing'
 func newDocumentTransformer(ctx context.Context) (tfr document.Transformer, err error) {
 	// TODO Modify component configuration here.
 	config := &markdown.HeaderConfig{
