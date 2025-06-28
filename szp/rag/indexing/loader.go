@@ -45,7 +45,7 @@ func newLoader(ctx context.Context) (ldr document.Loader, err error) {
 		return nil, err
 	}
 
-	xlsxParser, err := xlsx.NewXlsxParser()
+	xlsxParser, err := xlsx.NewXlsxParser(ctx, nil)
 	if err != nil {
 		return nil, err
 	}

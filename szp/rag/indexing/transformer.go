@@ -20,7 +20,6 @@ import (
 	"context"
 
 	"github.com/cloudwego/eino-ext/components/document/transformer/splitter/markdown"
-	"github.com/cloudwego/eino-ext/components/document/transformer/splitter/recursive"
 	"github.com/cloudwego/eino/components/document"
 )
 
@@ -29,7 +28,11 @@ func newDocumentTransformer(ctx context.Context) (tfr document.Transformer, err 
 	// TODO Modify component configuration here.
 	config := &markdown.HeaderConfig{
 		Headers: map[string]string{
-			"#": "title",
+			"#":     "title1",
+			"##":    "title2",
+			"###":   "title3",
+			"####":  "title4",
+			"#####": "title5",
 		},
 		TrimHeaders: false}
 	tfr, err = markdown.NewHeaderSplitter(ctx, config)
@@ -37,12 +40,12 @@ func newDocumentTransformer(ctx context.Context) (tfr document.Transformer, err 
 		return nil, err
 	}
 
-	tfr, err = recursive.NewSplitter(ctx, &recursive.Config{
-		ChunkSize:   1500,
-		OverlapSize: 300,
-	})
-	if err != nil {
-		return nil, err
-	}
+	// tfr, err = recursive.NewSplitter(ctx, &recursive.Config{
+	// 	ChunkSize:   1500,
+	// 	OverlapSize: 300,
+	// })
+	// if err != nil {
+	// 	return nil, err
+	// }
 	return tfr, nil
 }

@@ -37,3 +37,4 @@ output/*
 .DS_Store
 
 security.const.go
+/szp/rag/db

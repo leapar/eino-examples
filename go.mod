@@ -12,7 +12,6 @@ require (
 	github.com/cloudwego/eino-ext/components/document/parser/pdf v0.0.0-20250117061805-cd80d1780d76
 	github.com/cloudwego/eino-ext/components/document/parser/xlsx v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/document/transformer/splitter/markdown v0.0.0-20250424061409-ccd60fbc7c1c
-	github.com/cloudwego/eino-ext/components/document/transformer/splitter/recursive v0.0.0-20250424061409-ccd60fbc7c1c
 	github.com/cloudwego/eino-ext/components/embedding/ollama v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/indexer/chromem v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/model/ark v0.1.5
