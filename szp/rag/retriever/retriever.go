@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/cloudwego/eino-ext/components/reranker/bailian"
 	"github.com/cloudwego/eino-ext/components/retriever/chromem"
 	"github.com/cloudwego/eino/components/retriever"
 	cg "github.com/philippgille/chromem-go"
@@ -24,7 +23,7 @@ func init() {
 func newRetriever(ctx context.Context) (rtr retriever.Retriever, err error) {
 	config := &chromem.RetrieverConfig{
 		Client:         db,
-		TopK:           5,
+		TopK:           8,
 		ScoreThreshold: 0.5,
 	}
 	embeddingIns11, err := newEmbedding(ctx)
@@ -33,15 +32,15 @@ func newRetriever(ctx context.Context) (rtr retriever.Retriever, err error) {
 	}
 	config.Embedding = embeddingIns11
 	//重排序
-	reranker, err := bailian.NewReRanker(ctx, &bailian.ReRankerConfig{
-		Model:           "gte-rerank",
-		ReturnDocuments: false,
-		ApiKey:          ALI_BAILIAN_API_KEY,
-	})
-	if err != nil {
-		return nil, err
-	}
-	config.ReRanker = reranker
+	// reranker, err := bailian.NewReRanker(ctx, &bailian.ReRankerConfig{
+	// 	Model:           "gte-rerank",
+	// 	ReturnDocuments: false,
+	// 	ApiKey:          ALI_BAILIAN_API_KEY,
+	// })
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// config.ReRanker = reranker
 
 	rtr, err = chromem.NewRetriever(ctx, config)
 	if err != nil {

@@ -7,8 +7,8 @@ import (
 	"io/fs"
 	"path/filepath"
 
-	"github.com/cloudwego/eino-examples/szp/rag/deepsearch"
 	"github.com/cloudwego/eino-examples/szp/rag/indexing"
+	"github.com/cloudwego/eino-examples/szp/rag/retriever"
 
 	"github.com/cloudwego/eino/components/document"
 	"github.com/cloudwego/eino/schema"
@@ -23,7 +23,7 @@ func main() {
 func rag(ctx context.Context) {
 
 	// Call RunAgent with the input
-	sr, err := runAgent(ctx, "平台介绍")
+	sr, err := runAgent(ctx, "自发光")
 	if err != nil {
 		fmt.Printf("Error from RunAgent: %v\n", err)
 		return
@@ -45,7 +45,7 @@ func rag(ctx context.Context) {
 }
 
 func index(ctx context.Context) {
-	err := indexMarkdownFiles(ctx, "./eino-docs")
+	err := indexMarkdownFiles(ctx, "./my")
 	if err != nil {
 		panic(err)
 	}
@@ -100,14 +100,14 @@ func indexMarkdownFiles(ctx context.Context, dir string) error {
 
 func runAgent(ctx context.Context, query string) (*schema.StreamReader[*schema.Message], error) {
 
-	runner, err := deepsearch.BuildEinoAgent(ctx, query)
+	runner, err := retriever.BuildEinoAgent(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("failed to build agent graph: %w", err)
 	}
 
 	fmt.Println("问：", query)
 
-	userMessage := &deepsearch.UserMessage{
+	userMessage := &retriever.UserMessage{
 		Query: query,
 		//	History: make([]*schema.Message, 0),
 	}
