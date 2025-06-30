@@ -4,7 +4,7 @@ go 1.24.2
 
 require (
 	github.com/bytedance/sonic v1.13.2
-	github.com/cloudwego/eino v0.3.31
+	github.com/cloudwego/eino v0.3.45
 	github.com/cloudwego/eino-ext/components/document/loader/file v0.0.0-20250519091007-282cc7eb18d3
 	github.com/cloudwego/eino-ext/components/document/parser/csv v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/document/parser/doc v0.0.0-00010101000000-000000000000
@@ -45,6 +45,7 @@ require (
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cloudwego/base64x v0.1.5 // indirect
+	github.com/cloudwego/eino-ext/components/reranker v0.0.0-00010101000000-000000000000 // indirect
 	github.com/cloudwego/eino-ext/libs/acl/openai v0.0.0-20250331101427-906b8d194a99 // indirect
 	github.com/cohesion-org/deepseek-go v1.2.3 // indirect
 	github.com/dslipak/pdf v0.0.2 // indirect
@@ -108,7 +109,7 @@ require (
 )
 
 replace (
-	github.com/cloudwego/eino => D:\gocodes\ai\szp-eino
+	github.com/cloudwego/eino-ext => D:\gocodes\ai\szp-eino-ext
 	github.com/cloudwego/eino-ext/components/document/parser/csv => D:\gocodes\ai\szp-eino-ext\components\document\parser\csv
 	github.com/cloudwego/eino-ext/components/document/parser/doc => D:\gocodes\ai\szp-eino-ext\components\document\parser\doc
 	github.com/cloudwego/eino-ext/components/document/parser/pdf => D:\gocodes\ai\szp-eino-ext\components\document\parser\pdf
@@ -116,6 +117,7 @@ replace (
 	github.com/cloudwego/eino-ext/components/embedding/ollama => D:\gocodes\ai\szp-eino-ext\components\embedding\ollama
 	github.com/cloudwego/eino-ext/components/indexer/chromem => D:\gocodes\ai\szp-eino-ext\components\indexer\chromem
 	github.com/cloudwego/eino-ext/components/model/ollama => D:\gocodes\ai\szp-eino-ext\components\model\ollama
+	github.com/cloudwego/eino-ext/components/reranker => D:\gocodes\ai\szp-eino-ext\components\reranker
 	github.com/cloudwego/eino-ext/components/reranker/bailian => D:\gocodes\ai\szp-eino-ext\components\reranker\bailian
 	github.com/cloudwego/eino-ext/components/retriever => D:\gocodes\ai\szp-eino-ext\components\retriever
 	github.com/cloudwego/eino-ext/components/retriever/chromem => D:\gocodes\ai\szp-eino-ext\components\retriever\chromem
