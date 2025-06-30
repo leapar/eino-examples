@@ -4,9 +4,17 @@ go 1.24.2
 
 require (
 	github.com/bytedance/sonic v1.13.2
-	github.com/cloudwego/eino v0.3.43
+	github.com/cloudwego/eino v0.3.45
+	github.com/cloudwego/eino-ext/components/document/loader/file v0.0.0-20250626134119-cf4f96ea0039
+	github.com/cloudwego/eino-ext/components/document/parser/csv v0.0.0-00010101000000-000000000000
+	github.com/cloudwego/eino-ext/components/document/parser/doc v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/document/parser/html v0.0.0-20250117061805-cd80d1780d76
 	github.com/cloudwego/eino-ext/components/document/parser/pdf v0.0.0-20250117061805-cd80d1780d76
+	github.com/cloudwego/eino-ext/components/document/parser/xlsx v0.0.0-00010101000000-000000000000
+	github.com/cloudwego/eino-ext/components/document/transformer/splitter/markdown v0.0.0-20250626134119-cf4f96ea0039
+	github.com/cloudwego/eino-ext/components/embedding/ollama v0.0.0-00010101000000-000000000000
+	github.com/cloudwego/eino-ext/components/embedding/openai v0.0.0-20250626134119-cf4f96ea0039
+	github.com/cloudwego/eino-ext/components/indexer/chromem v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/model/ark v0.1.13
 	github.com/cloudwego/eino-ext/components/model/deepseek v0.0.0-20250221090944-e8ef7aabbe10
 	github.com/cloudwego/eino-ext/components/model/ollama v0.0.0-20250221090944-e8ef7aabbe10
@@ -84,12 +92,15 @@ require (
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/volcengine/volc-sdk-golang v1.0.196 // indirect
 	github.com/volcengine/volcengine-go-sdk v1.1.16 // indirect
+	github.com/xuri/efp v0.0.0-20240408161823-9ad904a10d6d // indirect
+	github.com/xuri/excelize/v2 v2.9.0 // indirect
+	github.com/xuri/nfp v0.0.0-20240318013403-ab9948c2c4a7 // indirect
 	github.com/yargevad/filepathx v1.0.0 // indirect
 	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
 	golang.org/x/arch v0.15.0 // indirect
 	golang.org/x/crypto v0.39.0 // indirect
 	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
-	golang.org/x/net v0.35.0 // indirect
+	golang.org/x/net v0.41.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/text v0.26.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
