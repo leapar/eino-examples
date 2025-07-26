@@ -4,10 +4,7 @@ go 1.24.2
 
 require (
 	github.com/bytedance/sonic v1.13.2
-	github.com/cloudwego/eino v0.3.45
-	github.com/cloudwego/eino-ext/components/document/loader/file v0.0.0-20250626134119-cf4f96ea0039
-	github.com/cloudwego/eino-ext/components/document/parser/csv v0.0.0-00010101000000-000000000000
-	github.com/cloudwego/eino-ext/components/document/parser/doc v0.0.0-00010101000000-000000000000
+	github.com/cloudwego/eino v0.3.48
 	github.com/cloudwego/eino-ext/components/document/parser/html v0.0.0-20250117061805-cd80d1780d76
 	github.com/cloudwego/eino-ext/components/document/parser/pdf v0.0.0-20250117061805-cd80d1780d76
 	github.com/cloudwego/eino-ext/components/document/parser/xlsx v0.0.0-00010101000000-000000000000
@@ -22,8 +19,7 @@ require (
 	github.com/cloudwego/eino-ext/components/reranker/bailian v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/retriever/chromem v0.0.0-00010101000000-000000000000
 	github.com/cloudwego/eino-ext/components/retriever/volc_vikingdb v0.0.0-20250319082935-6219ec437e56
-	github.com/cloudwego/eino-ext/components/tool/duckduckgo v0.0.0-20250221090944-e8ef7aabbe10
-	github.com/cloudwego/eino-ext/components/tool/mcp v0.0.0-20250424061409-ccd60fbc7c1c
+	github.com/cloudwego/eino-ext/components/tool/duckduckgo/v2 v2.0.0-20250707040601-2fab92740585
 	github.com/cloudwego/eino-ext/devops v0.1.7
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc
 	github.com/getkin/kin-openapi v0.118.0
@@ -35,12 +31,8 @@ require (
 )
 
 require (
-	code.sajari.com/docconv/v2 v2.0.0-pre.4 // indirect
-	github.com/JalfResi/justext v0.0.0-20170829062021-c0282dea7198 // indirect
-	github.com/PuerkitoBio/goquery v1.8.1 // indirect
-	github.com/advancedlogic/GoOse v0.0.0-20191112112754-e742535969c1 // indirect
-	github.com/andybalholm/cascadia v1.3.1 // indirect
-	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1 // indirect
+	github.com/PuerkitoBio/goquery v1.10.3 // indirect
+	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bytedance/sonic/loader v0.2.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
@@ -48,6 +40,7 @@ require (
 	github.com/cloudwego/eino-ext/components/reranker v0.0.0-00010101000000-000000000000 // indirect
 	github.com/cloudwego/eino-ext/libs/acl/openai v0.0.0-20250331101427-906b8d194a99 // indirect
 	github.com/cohesion-org/deepseek-go v1.2.3 // indirect
+	github.com/corpix/uarand v0.2.0 // indirect
 	github.com/dslipak/pdf v0.0.2 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/fatih/set v0.2.1 // indirect
@@ -81,10 +74,7 @@ require (
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/richardlehane/mscfb v1.0.4 // indirect
-	github.com/richardlehane/msoleps v1.0.4 // indirect
-	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/sashabaranov/go-openai v1.38.1 // indirect
+	github.com/sashabaranov/go-openai v1.37.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/slongfield/pyfmt v0.0.0-20220222012616-ea85ff4c361f // indirect
 	github.com/spf13/cast v1.7.1 // indirect
@@ -96,14 +86,11 @@ require (
 	github.com/xuri/excelize/v2 v2.9.0 // indirect
 	github.com/xuri/nfp v0.0.0-20240318013403-ab9948c2c4a7 // indirect
 	github.com/yargevad/filepathx v1.0.0 // indirect
-	github.com/yosida95/uritemplate/v3 v3.0.2 // indirect
-	golang.org/x/arch v0.15.0 // indirect
-	golang.org/x/crypto v0.39.0 // indirect
-	golang.org/x/exp v0.0.0-20250305212735-054e65f0b394 // indirect
-	golang.org/x/net v0.41.0 // indirect
-	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.26.0 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	golang.org/x/arch v0.14.0 // indirect
+	golang.org/x/exp v0.0.0-20250218142911-aa4b98e5adaa // indirect
+	golang.org/x/net v0.39.0 // indirect
+	golang.org/x/sys v0.32.0 // indirect
+	golang.org/x/text v0.24.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
