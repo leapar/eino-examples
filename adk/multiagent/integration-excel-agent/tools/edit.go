@@ -19,36 +19,37 @@ package tools
 import (
 	"context"
 	"encoding/json"
+	"path/filepath"
 
 	"github.com/cloudwego/eino-ext/components/tool/commandline"
 	"github.com/cloudwego/eino/components/tool"
 	"github.com/cloudwego/eino/schema"
+
+	"github.com/cloudwego/eino-examples/adk/multiagent/integration-excel-agent/params"
 )
 
-var (
-	editFileToolInfo = &schema.ToolInfo{
-		Name: "edit_file",
-		Desc: `This is a tool for editing file, with parameters including the file path and the content to be edited.
+var editFileToolInfo = &schema.ToolInfo{
+	Name: "edit_file",
+	Desc: `This is a tool for editing file, with parameters including the file path and the content to be edited.
 During task processing, if there is a need to create a file or overwrite file content, this tool can be used.
 
 Notice:
 - If the file does not exist, this tool creates it with permissions perm (0666); otherwise it will truncates it before writing, without changing permissions.
 - When using this tool, be sure that the file content is the complete full text; otherwise, it may cause loss or errors in the file content.
 - Only supports writing to text file s; writing to xls/xlsx files is not supported.`,
-		ParamsOneOf: schema.NewParamsOneOfByParams(map[string]*schema.ParameterInfo{
-			"path": {
-				Type:     schema.String,
-				Desc:     "file absolute path",
-				Required: true,
-			},
-			"content": {
-				Type:     schema.String,
-				Desc:     "file content",
-				Required: true,
-			},
-		}),
-	}
-)
+	ParamsOneOf: schema.NewParamsOneOfByParams(map[string]*schema.ParameterInfo{
+		"path": {
+			Type:     schema.String,
+			Desc:     "file absolute path",
+			Required: true,
+		},
+		"content": {
+			Type:     schema.String,
+			Desc:     "file content",
+			Required: true,
+		},
+	}),
+}
 
 func NewEditFileTool(op commandline.Operator) tool.InvokableTool {
 	return &editFile{op: op}
@@ -75,6 +76,12 @@ func (e *editFile) InvokableRun(ctx context.Context, argumentsInJSON string, opt
 	}
 	if len(input.Path) == 0 {
 		return "path can not be empty", nil
+	}
+	if !filepath.IsAbs(input.Path) {
+		wd, ok := params.GetTypedContextParams[string](ctx, params.WorkDirSessionKey)
+		if ok {
+			input.Path = filepath.Join(wd, input.Path)
+		}
 	}
 	o := tool.GetImplSpecificOptions(&options{op: e.op}, opts...)
 	err = o.op.WriteFile(ctx, input.Path, input.Content)

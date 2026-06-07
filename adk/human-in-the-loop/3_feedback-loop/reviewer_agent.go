@@ -25,6 +25,11 @@ import (
 	"github.com/cloudwego/eino/schema"
 )
 
+func init() {
+	// Register the FeedbackInfo type so that gob can correctly handle it during serialization.
+	schema.Register[*FeedbackInfo]()
+}
+
 type ReviewAgent struct {
 	AgentName string
 	AgentDesc string
@@ -49,7 +54,8 @@ func (fi *FeedbackInfo) String() string {
 }
 
 func (r ReviewAgent) Run(ctx context.Context, input *adk.AgentInput,
-	options ...adk.AgentRunOption) *adk.AsyncIterator[*adk.AgentEvent] {
+	options ...adk.AgentRunOption,
+) *adk.AsyncIterator[*adk.AgentEvent] {
 	iter, gen := adk.NewAsyncIteratorPair[*adk.AgentEvent]()
 
 	go func() {
@@ -76,7 +82,8 @@ func (r ReviewAgent) Run(ctx context.Context, input *adk.AgentInput,
 }
 
 func (r ReviewAgent) Resume(ctx context.Context, info *adk.ResumeInfo,
-	opts ...adk.AgentRunOption) *adk.AsyncIterator[*adk.AgentEvent] {
+	opts ...adk.AgentRunOption,
+) *adk.AsyncIterator[*adk.AgentEvent] {
 	iter, gen := adk.NewAsyncIteratorPair[*adk.AgentEvent]()
 
 	go func() {
